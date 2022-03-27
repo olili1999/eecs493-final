@@ -14,10 +14,11 @@ import React, {useState} from 'react';
 function App() {
 
   const [show, setShow] = useState(false);
-
-
+  const [formData, setFormData] = useState([]); 
   const [opac, setOpacity] = useState(1); 
   const [opacPopup, setOpacPopup] = useState(1); 
+
+  const [disable, setDisable] = useState(false); 
 
 
   function handleOpacityChange(){ 
@@ -29,18 +30,17 @@ function App() {
   function handleClickChanges(){
     setShow(!show); 
     handleOpacityChange(); 
+    setDisable(true); 
   }
 
-
-  
 
   return (
     <div id = "app">
       
       <div style = {{opacity: opac}}> 
         <div className = "bg-sky-900 flex justify-center space"> 
-          <div class = "ml-6 w-28 flex items-center"> 
-            <img class = "object-cover" src = {BlockMLogo}/>
+          <div className = "ml-6 w-28 flex items-center"> 
+            <img className = "object-cover" src = {BlockMLogo}/>
           </div> 
           <h1 className="text-5xl font-normal leading-normal text-blueGray-800 m-10 text-yellow-400 text-center">
             Meet and Greet @ the University of Michigan
@@ -50,9 +50,7 @@ function App() {
           A website to meet people and do cool stuff at U of M right now!
         </h2>
 
-
-        <div className = "mt-5 ml-5 mr-5 flex justify-between flex-wrap"> 
-          <Activity></Activity>
+        <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
           <Activity></Activity>
           <Activity></Activity>
           <Activity></Activity>
@@ -61,13 +59,17 @@ function App() {
         </div> 
         
         <div className = "flex justify-center mt-10"> 
-          <button onClick = {handleClickChanges} className="bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-yellow-400" type="button">
+          <button disabled = {disable} onClick = {handleClickChanges} className="bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-yellow-400" type="button">
             Add an activity
           </button>
         </div> 
 
       </div>
-      {show ? <Form style = {{opacity: opacPopup}}> </Form> : null} 
+
+
+      {formData}
+
+      {show ? <Form setShow = {setShow} setDisable = {setDisable} setOpacity = {setOpacity} setFormData = {setFormData} style = {{opacity: opacPopup}}> </Form> : null} 
  
     </div> 
   );
