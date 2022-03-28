@@ -72,10 +72,8 @@ function App() {
         <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
           {activities.map((activity) => {
               return (
-                //  activity.num_spots < activity.total_spots ? (<Activity activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
-                // </Activity>): null
-                <Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
-                </Activity>  
+                 activity.num_spots < activity.total_spots ? (<Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
+                  </Activity>): null
               );
             })}
         </div> 

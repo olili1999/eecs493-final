@@ -60,7 +60,7 @@ const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
                 <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="text" id="name"/>
             </div> 
             <div className = "flex"> 
-                <p># of people needed: </p> 
+                <p className = "text-sm"># people already signed up: </p> 
                 <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="number" id="name"/>
             </div> 
             <div className = "flex"> 
