@@ -1,12 +1,35 @@
-const Form = ({setFormData, setOpacity, setShow, setDisable})=>{
+import {db} from '../firebase-config';
+import {collection, addDoc, getDocs} from 'firebase/firestore';
 
+
+
+const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
+
+    const activitiesCollectionRef = collection(db, "activities"); 
+    
+    const createActivity = async(activity_name, location_name, description, num_spots, total_spots)=>{
+        // get data
+       await addDoc(activitiesCollectionRef, {activity_name: activity_name, location_name: location_name, description: description, num_spots: num_spots, total_spots: total_spots});
+    }; 
+
+    const getActivities = async () => {
+        const data = await getDocs(activitiesCollectionRef); 
+        setActivities(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
+    }; 
 
     const handleSubmit = (e) => {
+        const activity_name = e.target[0].value;
+        const location_name = e.target[1].value;
+        const description = e.target[2].value;
+        const num_spots = parseInt(e.target[3].value);
+        const total_spots = parseInt(e.target[4].value);
 
-        // get data
-        setFormData([e.target[0].value, e.target[1].value, 
-                     e.target[2].value, e.target[3].value, e.target[4].value]);
+        createActivity(activity_name, location_name, description, num_spots, total_spots); 
+        // setFormData([e.target[0].value, e.target[1].value, 
+        //              e.target[2].value, e.target[3].value, e.target[4].value]);
         // set rest of screen back to normal
+        
+        getActivities(); 
         setOpacity(1); 
         // get rid of popup
         setShow(false); 
@@ -38,11 +61,11 @@ const Form = ({setFormData, setOpacity, setShow, setDisable})=>{
             </div> 
             <div className = "flex"> 
                 <p># of people needed: </p> 
-                <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="text" id="name"/>
+                <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="number" id="name"/>
             </div> 
             <div className = "flex"> 
-                <p>Phone Number: </p> 
-                <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="text" id="name"/>
+                <p>Total # Spots: </p> 
+                <input className = "ml-1 border-solid border-2 border-sky-900 rounded-md" type="number" id="name"/>
             </div> 
             
         </div> 

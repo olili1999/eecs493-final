@@ -2,12 +2,13 @@ import logo from './logo.svg';
 import './App.css';
 
 import BlockMLogo from './blockm.png';
-
+import {db} from './firebase-config';
+import {collection, getDocs} from 'firebase/firestore';
 
 import Activity from "./components/Activity.js"
 import Form from "./components/Form.js"
-
-import React, {useState} from 'react'; 
+import React, {useState, useEffect} from 'react'; 
+import { setUserProperties } from 'firebase/analytics';
 
 
 
@@ -20,6 +21,11 @@ function App() {
 
   const [disable, setDisable] = useState(false); 
 
+  const [activities, setActivities] = useState([]); 
+  const [newActivity, setNewActivity] = useState("");
+
+
+  const activitiesCollectionRef = collection(db, "activities"); 
 
   function handleOpacityChange(){ 
     setOpacity(0.3); 
@@ -34,9 +40,22 @@ function App() {
   }
 
 
+  useEffect(()=>{ 
+    const getActivities = async () => {
+      const data = await getDocs(activitiesCollectionRef); 
+      setActivities(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
+    }
+    getActivities(); 
+  
+  },[])
+
+
+
+
   return (
     <div id = "app">
-      
+
+
       <div style = {{opacity: opac}}> 
         <div className = "bg-sky-900 flex justify-center space"> 
           <div className = "ml-6 w-28 flex items-center"> 
@@ -51,11 +70,14 @@ function App() {
         </h2>
 
         <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
-          <Activity></Activity>
-          <Activity></Activity>
-          <Activity></Activity>
-          <Activity></Activity>
-          <Activity></Activity>
+          {activities.map((activity) => {
+              return (
+                //  activity.num_spots < activity.total_spots ? (<Activity activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
+                // </Activity>): null
+                <Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
+                </Activity>  
+              );
+            })}
         </div> 
         
         <div className = "flex justify-center mt-10"> 
@@ -69,7 +91,7 @@ function App() {
 
       {formData}
 
-      {show ? <Form setShow = {setShow} setDisable = {setDisable} setOpacity = {setOpacity} setFormData = {setFormData} style = {{opacity: opacPopup}}> </Form> : null} 
+      {show ? <Form setActivities = {setActivities} setShow = {setShow} setDisable = {setDisable} setOpacity = {setOpacity} setFormData = {setFormData} style = {{opacity: opacPopup}}> </Form> : null} 
  
     </div> 
   );
