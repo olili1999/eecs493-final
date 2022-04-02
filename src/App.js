@@ -13,6 +13,7 @@ import { setUserProperties } from 'firebase/analytics';
 
 
 function App() {
+  const [totalActivitiesNow, setTotalActivitiesNow] = useState(0);
 
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState([]); 
@@ -46,8 +47,20 @@ function App() {
       setActivities(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
     }
     getActivities(); 
+
+    activities.map((activity)=>{ 
+      if(activity.num_spots > 0){ 
+        setTotalActivitiesNow(totalActivitiesNow+1); 
+      }
+      
+    }); 
+    console.log(totalActivitiesNow); 
+  
   
   },[])
+
+ 
+
 
 
 
@@ -72,10 +85,11 @@ function App() {
         <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
           {activities.map((activity) => {
               return (
-                 activity.num_spots < activity.total_spots ? (<Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
+                 activity.num_spots > 0 ? (<Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
                   </Activity>): null
               );
             })}
+          {totalActivitiesNow <= 0 ? (<p className = "font-light text-lg"> There are no activities now :( Please add some by clicking the "ADD AN ACTIVITY" button </p>) : null}
         </div> 
         
         <div className = "flex justify-center mt-10"> 

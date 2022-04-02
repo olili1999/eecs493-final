@@ -11,7 +11,7 @@ const Activity = ({setActivities, id, activity_name, location_name, description,
     
     const updateActivity = async(id, num_spots)=>{ 
         const newActivityDoc = doc(db, "activities", id); 
-        const newFields = {num_spots: num_spots+1};
+        const newFields = {num_spots: num_spots-1};
         await updateDoc(newActivityDoc, newFields);
         getActivities(); 
     };

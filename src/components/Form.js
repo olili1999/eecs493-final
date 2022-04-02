@@ -7,9 +7,11 @@ const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
 
     const activitiesCollectionRef = collection(db, "activities"); 
     
+
+
     const createActivity = async(activity_name, location_name, description, num_spots, total_spots)=>{
         // get data
-       await addDoc(activitiesCollectionRef, {activity_name: activity_name, location_name: location_name, description: description, num_spots: num_spots, total_spots: total_spots});
+       await addDoc(activitiesCollectionRef, {activity_name: activity_name, location_name: location_name, description: description, num_spots: total_spots-num_spots, total_spots: total_spots});
     }; 
 
     const getActivities = async () => {
@@ -23,6 +25,8 @@ const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
         const description = e.target[2].value;
         const num_spots = parseInt(e.target[3].value);
         const total_spots = parseInt(e.target[4].value);
+
+        console.log(e.target)
 
         createActivity(activity_name, location_name, description, num_spots, total_spots); 
         // setFormData([e.target[0].value, e.target[1].value, 
