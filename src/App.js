@@ -14,7 +14,6 @@ import { setUserProperties } from 'firebase/analytics';
 
 function App() {
   const [totalActivitiesNow, setTotalActivitiesNow] = useState(0);
-
   const [show, setShow] = useState(false);
   const [formData, setFormData] = useState([]); 
   const [opac, setOpacity] = useState(1); 
@@ -40,26 +39,35 @@ function App() {
     setDisable(true); 
   }
 
+  function countTotalActivities(){ 
+    let count = 0; 
+    activities.map((activity)=>{ 
+      if(activity.num_spots > 0){ 
+        count+=1; 
+      }
+    }); 
+    setTotalActivitiesNow(count); 
+  }
+
 
   useEffect(()=>{ 
     const getActivities = async () => {
       const data = await getDocs(activitiesCollectionRef); 
       setActivities(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
+      var count = 0; 
+      activities.map((activity) => {
+        count+=1; 
+      });
+      setTotalActivitiesNow(count); 
     }
+
     getActivities(); 
+  },[]);
 
-    activities.map((activity)=>{ 
-      if(activity.num_spots > 0){ 
-        setTotalActivitiesNow(totalActivitiesNow+1); 
-      }
-      
-    }); 
-    console.log(totalActivitiesNow); 
-  
-  
-  },[])
 
- 
+  useEffect(()=>{ 
+    countTotalActivities(); 
+  }, [activities]);  
 
 
 
@@ -85,11 +93,11 @@ function App() {
         <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
           {activities.map((activity) => {
               return (
-                 activity.num_spots > 0 ? (<Activity setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots}>
+                 activity.num_spots > 0 ? (<Activity activities = {activities} totalActivitiesNow = {totalActivitiesNow} setTotalActivitiesNow = {setTotalActivitiesNow} setActivities = {setActivities} id = {activity.id} activity_name = {activity.activity_name} location_name = {activity.location_name} description = {activity.description} num_spots = {activity.num_spots} total_spots = {activity.total_spots} phone_num = {activity.phone_num}>
                   </Activity>): null
               );
             })}
-          {totalActivitiesNow <= 0 ? (<p className = "font-light text-lg"> There are no activities now :( Please add some by clicking the "ADD AN ACTIVITY" button </p>) : null}
+          {totalActivitiesNow === 0 ? (<p className = "font-light text-lg"> There are no activities now :( Please add some by clicking the "ADD AN ACTIVITY" button </p>) : null}
         </div> 
         
         <div className = "flex justify-center mt-10"> 

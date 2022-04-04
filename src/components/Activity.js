@@ -1,7 +1,7 @@
 import {db} from '../firebase-config';
 import {collection, updateDoc, doc, getDocs} from 'firebase/firestore';
 
-const Activity = ({setActivities, id, activity_name, location_name, description, num_spots, total_spots}) =>{
+const Activity = ({activities, setTotalActivitiesNow, setActivities, id, activity_name, location_name, description, num_spots, total_spots, phone_num}) =>{
     const activitiesCollectionRef = collection(db, "activities"); 
 
     const getActivities = async () => {
@@ -14,6 +14,17 @@ const Activity = ({setActivities, id, activity_name, location_name, description,
         const newFields = {num_spots: num_spots-1};
         await updateDoc(newActivityDoc, newFields);
         getActivities(); 
+        let count = 0; 
+
+        activities.map((activity)=>{ 
+          if(activity.num_spots > 0){ 
+            count+=1; 
+          }
+        }); 
+        console.log(count); 
+        setTotalActivitiesNow(count);
+
+
     };
     
     return (
@@ -33,12 +44,15 @@ const Activity = ({setActivities, id, activity_name, location_name, description,
                 <p className = "ml-2 mt-0 text-md font-semibold">{num_spots}/{total_spots}</p> 
                 <p className = "ml-1 mt-0 text-md">  spots are available</p> 
             </div>
+            <div className = "ml-2 flex justify-items"> 
+                <p className = "ml-2 mt-0 text-md"> Phone Number: {phone_num}</p> 
+            </div>
             <div className = "w-full flex justify-center"> 
                 <button onClick = {()=> {updateActivity(id, num_spots)}} className="mt-5 bg-sky-900 text-white active:bg-sky-900 font-bold uppercase text-sm px-6 py-1.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Join Activity
                 </button>
             </div> 
-        
+     
         </div>
 
     )
