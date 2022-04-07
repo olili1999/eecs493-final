@@ -10,6 +10,9 @@ import Form from "./components/Form.js"
 import React, {useState, useEffect} from 'react'; 
 import { setUserProperties } from 'firebase/analytics';
 
+import Question from './Question.png'; 
+
+import ReactTooltip from 'react-tooltip';
 
 
 function App() {
@@ -82,13 +85,21 @@ function App() {
           <div className = "ml-6 w-28 flex items-center"> 
             <img className = "object-cover" src = {BlockMLogo}/>
           </div> 
-          <h1 className="text-5xl font-normal leading-normal text-blueGray-800 m-10 text-yellow-400 text-center">
+          <h1 className="text-5xl font-normal leading-normal text-blueGray-800 m-10 text-yellow-300 text-center">
             Meet and Greet @ the University of Michigan
           </h1>   
         </div> 
+
+
         <h2 className = "text-3xl m-10 text-center"> 
           A website to meet people and do cool stuff at U of M right now!
         </h2>
+        <ReactTooltip className="tooltip" multiline = {true}/>
+        <div className= "w-full flex justify-center"> 
+          <div data-tip = "To use this website, click add an activity below and enter an activity, location, description, and number of people. If you don't want to add an activity, feel free to join an activity. Make sure to look at the person's phone number and text them before you join!" className = "ml-6 w-12 mr-6"> 
+            <img className = "object-cover" src = {Question}/>
+          </div>
+        </div> 
 
         <div className = "mt-5 ml-5 mr-5 flex justify-center flex-wrap"> 
           {activities.map((activity) => {
@@ -105,7 +116,6 @@ function App() {
             Add an activity
           </button>
         </div> 
-
       </div>
 
 

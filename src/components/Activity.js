@@ -45,8 +45,10 @@ const Activity = ({activities, setTotalActivitiesNow, setActivities, id, activit
                 <p className = "ml-1 mt-0 text-md">  spots are available</p> 
             </div>
             <div className = "ml-2 flex justify-items"> 
-                <p className = "ml-2 mt-0 text-md"> Phone Number: {phone_num}</p> 
+                <p className = "ml-2 mt-0 text-md font-semibold">Phone Number:</p> 
+                <p className = "ml-1 mt-0 text-md"> {phone_num}</p> 
             </div>
+         
             <div className = "w-full flex justify-center"> 
                 <button onClick = {()=> {updateActivity(id, num_spots)}} className="mt-5 bg-sky-900 text-white active:bg-sky-900 font-bold uppercase text-sm px-6 py-1.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Join Activity
