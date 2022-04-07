@@ -93,7 +93,7 @@ const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
                 <input required className = "h-8 ml-1 border-solid border-2 border-sky-900 rounded-md" type="text" id="name"/>
             </div> 
             <div className = "flex"> 
-                <p className = "text-sm"># people already signed up: </p> 
+                <p className = "text-sm"># people already in: </p> 
                 <input required list = "num_already_signed" className = "h-8 ml-1 border-solid border-2 border-sky-900 rounded-md" type="number" id="name"/>
                 <datalist id="num_already_signed">
                     <option value="0"> </option> 
