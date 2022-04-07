@@ -29,7 +29,7 @@ const Activity = ({activities, setTotalActivitiesNow, setActivities, id, activit
     
     return (
         <div className = "w-96 m-1 border-solid border-2 border-sky-900 rounded-lg"> 
-            <div className = "w-full rounded-tl-md rounded-tr-md bg-sky-900 text-yellow-400"> 
+            <div className = "w-full rounded-tl-md rounded-tr-md bg-sky-900 text-yellow-300"> 
                 <h4 className = "text-center text-2xl mb-2">Activity Name: {activity_name} </h4>
             </div> 
             <div className = "ml-2 flex justify-items"> 

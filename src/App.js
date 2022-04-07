@@ -112,7 +112,7 @@ function App() {
         </div> 
         
         <div className = "flex justify-center mt-10"> 
-          <button disabled = {disable} onClick = {handleClickChanges} className="bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150 text-yellow-400" type="button">
+          <button disabled = {disable} onClick = {handleClickChanges} className="bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
             Add an activity
           </button>
         </div> 
