@@ -11,7 +11,7 @@ We used [react-tooltip ](https://www.npmjs.com/package/react-tooltip)
 ### Hosting 
 We deployed using Netlify and following tutorials on YouTube. 
 ### Tutorials
-We used the following tutorial to figure out how to make a CRUD app using [Firestore and React. ](https://www.youtube.com/watch?v=jCY6DH8F4oc) and re-factored it to our specific usecase. 
+We used the following tutorial to figure out how to make a CRUD app using [Firestore and React](https://www.youtube.com/watch?v=jCY6DH8F4oc) and re-factored it to our specific use case. 
 
 
 
