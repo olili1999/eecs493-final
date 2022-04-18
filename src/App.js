@@ -94,6 +94,7 @@ function App() {
         <h2 className = "text-3xl m-10 text-center"> 
           A website to meet people and do cool stuff at U of M right now!
         </h2>
+        <p className = "text-md m-10 text-center"> Help Documentation Below (Hover over the Question Mark!)</p> 
         <ReactTooltip className="tooltip" multiline = {true}/>
         <div className= "w-full flex justify-center"> 
           <div data-tip = "To use this website, click add an activity below and enter an activity, location, description, and number of people. If you don't want to add an activity, feel free to join an activity. Make sure to look at the person's phone number and text them before you join!" className = "ml-6 w-12 mr-6"> 
@@ -112,7 +113,7 @@ function App() {
         </div> 
         
         <div className = "flex justify-center mt-10"> 
-          <button disabled = {disable} onClick = {handleClickChanges} className="bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+          <button disabled = {disable} onClick = {handleClickChanges} className="hover:bg-yellow-400 bg-sky-900 text-white active:bg-sky-700 font-bold uppercase text-sm px-16 py-6 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
             Add an activity
           </button>
         </div> 

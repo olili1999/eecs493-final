@@ -50,7 +50,7 @@ const Activity = ({activities, setTotalActivitiesNow, setActivities, id, activit
             </div>
          
             <div className = "w-full flex justify-center"> 
-                <button onClick = {()=> {updateActivity(id, num_spots)}} className="mt-5 bg-sky-900 text-white active:bg-sky-900 font-bold uppercase text-sm px-6 py-1.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
+                <button onClick = {()=> {updateActivity(id, num_spots)}} className="hover:bg-yellow-400 mt-5 bg-sky-900 text-white active:bg-sky-900 font-bold uppercase text-sm px-6 py-1.5 rounded shadow hover:shadow-md outline-none focus:outline-none mr-1 mb-1 ease-linear transition-all duration-150" type="button">
                     Join Activity
                 </button>
             </div> 

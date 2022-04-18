@@ -151,7 +151,7 @@ const Form = ({setFormData, setOpacity, setShow, setDisable, setActivities})=>{
                 <input required className = "h-8 ml-1 border-solid border-2 border-sky-900 rounded-md" type="tel" id="name"/>
             </div> 
         </div> 
-        <input required className = "mt-2 h-8 cursor-pointer bg-sky-900 absolute bottom-0 w-full text-white rounded-bl-md rounded-br-md" type="submit" value="Submit" />
+        <input required className = "hover:bg-yellow-400 mt-2 h-8 cursor-pointer bg-sky-900 absolute bottom-0 w-full text-white rounded-bl-md rounded-br-md" type="submit" value="Submit" />
     </form>
 
     )
